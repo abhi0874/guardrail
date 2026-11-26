@@ -1,0 +1,232 @@
+{
+  "schema_version": "api-1.0",
+  "export_format": "static-1.0",
+  "source_scan_id": "70dcd438-ffc2-4e6c-9d9b-1459c063c999",
+  "resources": [
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/argument-tampering-classification-swap.json",
+      "bytes": 1100,
+      "sha256": "2d823fe365598e49a18737b362dc10d0e16b6f2747105c9c52d56c0898cee79b"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/argument-tampering-internal-resource-swap.json",
+      "bytes": 1031,
+      "sha256": "1378c74060059a8bcde3754761808d643a91384a996f5696f29ea43246691a2c"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/argument-tampering-message-content-swap.json",
+      "bytes": 1102,
+      "sha256": "05d8aa7a3bcf83058be1e75e1bc316ec46cf9bcf11194b4a347461b05f9303bb"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/argument-tampering-read-id-swap.json",
+      "bytes": 1011,
+      "sha256": "32284b9b72c447de8a89268e6831eb366b3c5897e3335ff59b627f34fc7980d5"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/argument-tampering-retrieval-parameter-laundering.json",
+      "bytes": 1358,
+      "sha256": "43527d233dcd7b21e00a05dd020289b9d68b213427cd878740b1b7c2c2553a0c"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/argument-tampering-write-target-swap.json",
+      "bytes": 1096,
+      "sha256": "9be5256775e43cef0ec9ad5b9450edf63596612f15b767b27f3756562d8aa69b"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/direct-command-impersonation.json",
+      "bytes": 1316,
+      "sha256": "acb7a19f8257516e089c51671dabc318b0e4f1a3825e2f1cbc1935f337cc7cf3"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/direct-debug-disclosure.json",
+      "bytes": 1070,
+      "sha256": "5382abcb833fdb29897fe2aca30e87512b51d7b67e0a844a4b0ee7d0ef090002"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/direct-policy-exception.json",
+      "bytes": 1073,
+      "sha256": "7cab9e64b8f159a48a86769bfc271f80c3c81e3eb492ac3e05342da0563f8308"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/direct-role-assignment.json",
+      "bytes": 1304,
+      "sha256": "203a9dec6ce28f76e0d89d26017a604fb6c0254b0d72f8009a89657f11658d0c"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/direct-system-override.json",
+      "bytes": 1309,
+      "sha256": "aee4e0a9c9502084afaa5f4c3bba3796633e23b749996b0ac2429b66a8705235"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/direct-task-redirection.json",
+      "bytes": 1306,
+      "sha256": "8d569273fc49f46bab3797d1d6dbd67e9b980ce30b41a613768989460061cfd1"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/exfiltration-answer-canary.json",
+      "bytes": 1309,
+      "sha256": "e51b2bbdd6cafb05739b4a388032ab5cbf0a997087ab25112d62b58567e8777c"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/exfiltration-declassify-for-disclosure.json",
+      "bytes": 1103,
+      "sha256": "238e49a5953e7a9cc4c892e3409b8e9e4be47e337e1d51c6521bb6e3716d5faf"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/exfiltration-mock-outbox-copy.json",
+      "bytes": 1082,
+      "sha256": "f611d7a66fe3e81ee3cf5d36a1318282f8d5e995d9b9a8a9a273d5e9f169cf63"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/exfiltration-public-answer-mixing.json",
+      "bytes": 1323,
+      "sha256": "c03f3b2f3122c393c9a0cb52dc79739e83938232a0ac7cd4855452091549527e"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/exfiltration-public-document-copy.json",
+      "bytes": 1090,
+      "sha256": "4d8ec9dd1ac45984a0a207c3b9f2006ffc8dcd6085a734612c6c903cb7bc055b"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/exfiltration-split-canary.json",
+      "bytes": 1074,
+      "sha256": "168905c43e049fb8ec3435836e9ab2ce1e0f695829166e7324864152f965f051"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/indirect-citation-instructions.json",
+      "bytes": 1320,
+      "sha256": "3b003b0402879ded08a8a2093cdcf2d6b87bf6422079a1edcdfcfe7a1ebdf2c7"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/indirect-conflicting-evidence.json",
+      "bytes": 1315,
+      "sha256": "13daab66ab9d4592ad3ac6661a9534e0cf772331517ed9c11a3bc135dff23230"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/indirect-fake-policy-notice.json",
+      "bytes": 1314,
+      "sha256": "8777323c4698164f0bab9a51f06467e3528c61b3268c6b1ab3364d0aca0e9674"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/indirect-metadata-authority.json",
+      "bytes": 1319,
+      "sha256": "b93ccbe021698628b6ddb7556ae34f4de392effb4116c3845203eb700c4f434b"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/indirect-quoted-tool-result.json",
+      "bytes": 1314,
+      "sha256": "e4bbeccdf2803d559cbacdbdbe77ab5ae98fac2671415a1edc338740947848c0"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/indirect-role-delimiter.json",
+      "bytes": 1306,
+      "sha256": "044b6a387c65f0124e902adafdad811e1575702a527f9f3f6f9864d8bed44024"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/poisoned-documents-access-reclassification.json",
+      "bytes": 1344,
+      "sha256": "0732add7b7e93024b6efff8d45c2a0ea1f64c856a227852338d67ff5e5185c88"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/poisoned-documents-answer-template.json",
+      "bytes": 1333,
+      "sha256": "6208fa3a1582c4959de3ad683cf42ca535fc8bc0ccba46592e345119a4440e24"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/poisoned-documents-appendix-leak.json",
+      "bytes": 1321,
+      "sha256": "f5225d0b53d0c6a046bd032a903efb878fa2727f1949aeadd5aea780a8f08dc7"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/poisoned-documents-forged-system-header.json",
+      "bytes": 1338,
+      "sha256": "b3ce42ce5563671146727e0fb3b20d9079b9aa0065cf891b3d6e839f224fd3e5"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/poisoned-documents-hidden-comment.json",
+      "bytes": 1331,
+      "sha256": "eca916fba949eed9d261b22ccf1c73895c887caafc562c041ae8624f436c07c2"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/poisoned-documents-tool-routing-table.json",
+      "bytes": 1334,
+      "sha256": "fff395f3d608b7227956e89fceae27d7e953644ca2091a6a490e13b9b605523d"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/privilege-escalation-access-downgrade.json",
+      "bytes": 1101,
+      "sha256": "2d20c4c931fb0326320fce29b5e654f84e58388c38fa30f326c6cb9a673b3418"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/privilege-escalation-forged-approval.json",
+      "bytes": 1332,
+      "sha256": "dd1652ebad520856d67577658b4a9fa9a010931ae43285b409e2ec6406fe8e22"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/privilege-escalation-policy-rewrite.json",
+      "bytes": 1564,
+      "sha256": "71ef4ff660736b604265d4b4e212bc75dce30da406c08656c2b99e6dc619ba35"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/privilege-escalation-reader-admin-spoof.json",
+      "bytes": 1338,
+      "sha256": "2c103d11071d34ce231e9bad677e1f7160b04c79379be62862845b85e4f79805"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/privilege-escalation-staff-to-admin.json",
+      "bytes": 1097,
+      "sha256": "2cf9ce981dfea3d71d451ba7b4fba2d98525fde97180e64c3862779be8ffb6d9"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/privilege-escalation-tool-transcript-escalation.json",
+      "bytes": 1354,
+      "sha256": "2906102be605f49e62b55662bdf8faada294c37b3ce098e999cb1ab7b5e85bce"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/unauthorized-calls-internal-read.json",
+      "bytes": 1091,
+      "sha256": "982d0d953f2017b53ee121a83bf67dffc65c990f041e9d08c410e67f8faea5e3"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/unauthorized-calls-public-write.json",
+      "bytes": 1011,
+      "sha256": "02be21be8cf5540f07513e0ff27da5c04e2de7d0474c0cf0c79edc70a2a326f7"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/unauthorized-calls-restricted-read.json",
+      "bytes": 1095,
+      "sha256": "556379dedc3f1de19b82ec2553f82862062d00035f1a1d92e37a3484824c452e"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/unauthorized-calls-scope-expansion.json",
+      "bytes": 1017,
+      "sha256": "d135b0c0ad74b809794e380b6bbd59a18364eb83d3339f977073c4d78c558c9c"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/unauthorized-calls-unrequested-message.json",
+      "bytes": 1100,
+      "sha256": "d96d3de1c1415c1b6b08af2bfa2cea84525ea98f9914be078156ba08583e5b07"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks/unauthorized-calls-unrequested-search.json",
+      "bytes": 1101,
+      "sha256": "25e4801ee09d473951087ee8e1963a8eb3c50532ac20248055e0d61a7421bfb3"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/attacks.json",
+      "bytes": 2864,
+      "sha256": "2ae5a676444f844e029f0358446a6d8df1c3fd8a9f2fca29411fee0fc8042133"
+    },
+    {
+      "path": "scans/70dcd438-ffc2-4e6c-9d9b-1459c063c999/findings.json",
+      "bytes": 11336,
+      "sha256": "23e7d1b1cf4d0c893af4c8e6af79eac48d26e2ee940fb476719dc105dd4b3681"
+    },
+    {
+      "path": "overview.json",
+      "bytes": 274,
+      "sha256": "7290a30988f7bc43f2eaaa93b855afcde9e71d1b01d4943ad62526273605c0e1"
+    }
+  ]
+}

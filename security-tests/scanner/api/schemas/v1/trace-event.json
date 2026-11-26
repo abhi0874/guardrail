@@ -1,0 +1,412 @@
+{
+  "$defs": {
+    "CallEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "const": "tool_call",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/CallPayload"
+        },
+        "provenance": {
+          "$ref": "#/$defs/EventProvenance"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sequence",
+        "provenance",
+        "event_type",
+        "payload"
+      ],
+      "title": "CallEvent",
+      "type": "object"
+    },
+    "CallPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Arguments",
+          "type": "object"
+        },
+        "call_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Call Id",
+          "type": "string"
+        },
+        "name": {
+          "enum": [
+            "search_documents",
+            "read_document",
+            "send_message",
+            "update_document",
+            "change_access_level"
+          ],
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "arguments",
+        "call_id"
+      ],
+      "title": "CallPayload",
+      "type": "object"
+    },
+    "Document": {
+      "additionalProperties": false,
+      "properties": {
+        "access": {
+          "enum": [
+            "public",
+            "internal",
+            "restricted"
+          ],
+          "title": "Access",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "document_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Document Id",
+          "type": "string"
+        },
+        "source": {
+          "const": "synthetic-corpus-v1",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "content",
+        "access",
+        "source"
+      ],
+      "title": "Document",
+      "type": "object"
+    },
+    "DocumentResult": {
+      "additionalProperties": false,
+      "properties": {
+        "access": {
+          "enum": [
+            "public",
+            "internal",
+            "restricted"
+          ],
+          "title": "Access",
+          "type": "string"
+        },
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "document_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Document Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_id",
+        "content",
+        "access"
+      ],
+      "title": "DocumentResult",
+      "type": "object"
+    },
+    "ErrorEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "const": "error",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/ErrorPayload"
+        },
+        "provenance": {
+          "$ref": "#/$defs/EventProvenance"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sequence",
+        "provenance",
+        "event_type",
+        "payload"
+      ],
+      "title": "ErrorEvent",
+      "type": "object"
+    },
+    "ErrorPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "call_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Call Id"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "call_id",
+        "code",
+        "message"
+      ],
+      "title": "ErrorPayload",
+      "type": "object"
+    },
+    "EventProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "source": {
+          "enum": [
+            "sandbox",
+            "synthetic-corpus-v1"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "title": "EventProvenance",
+      "type": "object"
+    },
+    "MessageEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "const": "message",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/MessagePayload"
+        },
+        "provenance": {
+          "$ref": "#/$defs/EventProvenance"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sequence",
+        "provenance",
+        "event_type",
+        "payload"
+      ],
+      "title": "MessageEvent",
+      "type": "object"
+    },
+    "MessagePayload": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "title": "Content",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "system",
+            "user",
+            "assistant"
+          ],
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ],
+      "title": "MessagePayload",
+      "type": "object"
+    },
+    "ResultEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "const": "tool_result",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/ResultPayload"
+        },
+        "provenance": {
+          "$ref": "#/$defs/EventProvenance"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sequence",
+        "provenance",
+        "event_type",
+        "payload"
+      ],
+      "title": "ResultEvent",
+      "type": "object"
+    },
+    "ResultPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "call_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Call Id",
+          "type": "string"
+        },
+        "result": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Document"
+            },
+            {
+              "$ref": "#/$defs/DocumentResult"
+            },
+            {
+              "$ref": "#/$defs/StoredMessage"
+            },
+            {
+              "items": {
+                "maxLength": 128,
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ],
+          "title": "Result"
+        }
+      },
+      "required": [
+        "call_id",
+        "result"
+      ],
+      "title": "ResultPayload",
+      "type": "object"
+    },
+    "RetrievalEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "event_type": {
+          "const": "retrieved_document",
+          "title": "Event Type",
+          "type": "string"
+        },
+        "payload": {
+          "$ref": "#/$defs/Document"
+        },
+        "provenance": {
+          "$ref": "#/$defs/EventProvenance"
+        },
+        "sequence": {
+          "minimum": 0,
+          "title": "Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sequence",
+        "provenance",
+        "event_type",
+        "payload"
+      ],
+      "title": "RetrievalEvent",
+      "type": "object"
+    },
+    "StoredMessage": {
+      "additionalProperties": false,
+      "properties": {
+        "stored_message_index": {
+          "minimum": 0,
+          "title": "Stored Message Index",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "stored_message_index"
+      ],
+      "title": "StoredMessage",
+      "type": "object"
+    }
+  },
+  "$id": "urn:agent-security-scanner:api:v1:trace-event",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "discriminator": {
+    "mapping": {
+      "error": "#/$defs/ErrorEvent",
+      "message": "#/$defs/MessageEvent",
+      "retrieved_document": "#/$defs/RetrievalEvent",
+      "tool_call": "#/$defs/CallEvent",
+      "tool_result": "#/$defs/ResultEvent"
+    },
+    "propertyName": "event_type"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/MessageEvent"
+    },
+    {
+      "$ref": "#/$defs/CallEvent"
+    },
+    {
+      "$ref": "#/$defs/ResultEvent"
+    },
+    {
+      "$ref": "#/$defs/RetrievalEvent"
+    },
+    {
+      "$ref": "#/$defs/ErrorEvent"
+    }
+  ]
+}

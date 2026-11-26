@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+license = "Apache-2.0"
+name = "mcp-agent-server"
+version = "0.1.0"
+description = "Local MCP server foundation with a deterministic stdio health probe"
+requires-python = ">=3.11"
+dependencies = [
+    "anyio==4.16.0",
+    "httpx==0.28.1",
+    "httpx2==2.16.0",
+    "jsonschema==4.26.0",
+    "mcp==2.3.0",
+    "psycopg[binary,pool]>=3.3,<3.4",
+    "pydantic>=2.10,<3",
+    "pyyaml==6.0.3",
+    "starlette==1.10.0",
+    "uvicorn==0.54.0",
+]
+
+[project.optional-dependencies]
+gemini = [
+    "google-genai==3.0.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8,<10",
+  "pytest-asyncio>=1,<2",
+  "pytest-cov>=7,<8",
+  "coverage>=7.10,<8",
+  "ruff>=0.11,<1",
+  "mypy>=1.15,<3",
+  "pre-commit>=4,<5",
+  "types-pyyaml>=6.0.12.20261103",
+  "types-jsonschema>=4.26.0.20261006",
+  "google-genai==3.0.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mcp_agent_server"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--strict-config --strict-markers -m 'not live_llm' --cov=mcp_agent_server --cov-report=term-missing"
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+markers = ["live_llm: opt-in test that needs a separately configured live model provider"]
+
+[tool.coverage.run]
+source = ["mcp_agent_server"]
+patch = ["subprocess"]
+
+[tool.coverage.report]
+fail_under = 95
+show_missing = true
+
+[tool.ruff]
+extend-exclude = [".cache", ".runtime", ".venv", "node_modules", ".next"]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src", "tests"]

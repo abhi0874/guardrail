@@ -1,0 +1,12 @@
+{
+  "scope": "local_synthetic_sandbox",
+  "schema_version": "api-1.0",
+  "counts": {
+    "recorded_executions": 42,
+    "blocked_or_not_observed": 31,
+    "successful_attack_executions": 7,
+    "indeterminate": 4,
+    "distinct_findings": 4,
+    "observed_effects": 7
+  }
+}

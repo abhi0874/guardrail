@@ -1,0 +1,604 @@
+/* Shared dashboard layout, account forms and evidence views. */
+.frame {
+  max-width: none;
+  grid-template-columns: 224px minmax(0, 1fr);
+}
+.sidebar {
+  padding: 27px 16px 18px;
+  overflow-y: auto;
+}
+.brand {
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 640;
+  letter-spacing: -1.3px;
+}
+.brandmark {
+  width: 32px;
+  height: 33px;
+  background: var(--text);
+  color: var(--page);
+  border-radius: 9px;
+}
+.brandmark svg {
+  width: 20px;
+  stroke-width: 1.7;
+}
+.sidebar nav {
+  margin-top: 35px;
+}
+.nav-group + .nav-group {
+  margin-top: 22px;
+}
+.nav-label,
+.section-caption > span,
+.release-ref,
+.hero-label {
+  font-size: 11px;
+  letter-spacing: 0.065em;
+  font-weight: 560;
+}
+.nav-label {
+  margin: 0 12px 8px;
+  text-transform: uppercase;
+}
+.nav-item {
+  min-height: 36px;
+  margin: 2px 0;
+  padding: 8px 12px;
+  gap: 11px;
+  font-size: 13px;
+  border: 1px solid transparent;
+}
+.nav-item[aria-current] {
+  color: var(--text);
+  border-color: var(--line);
+}
+.side-foot {
+  margin-top: auto;
+  padding-top: 16px;
+}
+.sidebar nav {
+  padding-bottom: 24px;
+}
+.account-link,
+.release-ref,
+.hero-label,
+.text-link,
+.actions,
+.receipt-top span,
+.account-footer,
+.account-symbol,
+.identity {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.top {
+  height: 64px;
+}
+.account-link {
+  min-height: 44px;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 570;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+}
+.top-right {
+  gap: 10px;
+}
+.sign-out-dialog {
+  width: min(420px, calc(100% - 32px));
+  margin: auto;
+  padding: clamp(20px, 5vw, 28px);
+  background: var(--panel);
+  color: var(--text);
+}
+.sign-out-dialog::backdrop {
+  background: rgb(23 62 50 / 42%);
+}
+.sign-out-dialog p,
+.sign-out-dialog output:not(:empty) {
+  margin-top: 8px;
+  color: var(--muted);
+}
+.sign-out-dialog output:not(:empty) {
+  display: block;
+}
+.sign-out-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 20px;
+}
+.work {
+  min-width: 0;
+}
+main {
+  max-width: 1450px;
+  padding: clamp(24px, 3.1vw, 49px) clamp(22px, 3.6vw, 58px);
+}
+.page-head {
+  margin-bottom: 23px;
+}
+.title-row,
+.section-caption,
+.receipt-top,
+.account-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.page-head h1 {
+  font-size: clamp(30px, 3vw, 46px);
+  font-weight: 540;
+  letter-spacing: -0.065em;
+}
+.page-head p {
+  line-height: 1.55;
+}
+.release-ref {
+  color: var(--muted);
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-family: ui-monospace, monospace;
+  font-weight: 400;
+}
+.lab-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #234c39;
+  color: #f9f9e9;
+  border: 1px solid #335e47;
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(200px, 0.7fr);
+  align-items: center;
+  min-height: 228px;
+  padding: 30px clamp(24px, 3vw, 46px);
+}
+.lab-hero > div:first-child {
+  position: relative;
+  z-index: 1;
+}
+.hero-label {
+  color: #d8eea6;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+.lab-hero h2 {
+  font-size: clamp(35px, 3.6vw, 58px);
+  font-weight: 480;
+  line-height: 1.08;
+  letter-spacing: -0.065em;
+  margin: 12px 0 8px;
+}
+.lab-hero p {
+  color: #d4e3cb;
+  font-size: 14px;
+  max-width: 45ch;
+}
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  background: #f9f9e9;
+  color: #173e32;
+  border-radius: 7px;
+  padding: 10px 15px;
+  margin-top: 21px;
+  font-size: 13px;
+  font-weight: 580;
+}
+.section-caption {
+  margin: 26px 0 12px;
+}
+.section-caption h2 {
+  font-size: 17px;
+  font-weight: 560;
+  letter-spacing: -0.035em;
+}
+.section-caption > span {
+  color: var(--muted);
+  letter-spacing: 0;
+  font-size: 12px;
+}
+.metric-grid {
+  margin-top: 0;
+  gap: 14px;
+}
+.panel {
+  border-radius: 13px;
+}
+.metric {
+  padding: 17px 20px;
+}
+.metric strong {
+  font-size: clamp(30px, 2.7vw, 42px);
+  font-weight: 510;
+  margin: 9px 0 3px;
+}
+.metric small {
+  font-size: 12px;
+}
+.metric-title svg {
+  color: var(--muted);
+}
+.two-col {
+  margin-top: 16px;
+}
+.content-card {
+  padding: 22px 24px;
+}
+.section-title h2,
+.detail h2,
+.account-card h2 {
+  font-weight: 560;
+  letter-spacing: -0.045em;
+  font-size: 19px;
+}
+.icon-link {
+  width: 30px;
+  height: 30px;
+}
+.icon-link svg {
+  width: 17px;
+}
+.text-link {
+  font-size: 13px;
+  font-weight: 570;
+  min-height: 32px;
+}
+.text-link:hover {
+  text-decoration: underline;
+}
+.content-card > .text-link {
+  margin-top: 10px;
+}
+.bar {
+  height: 14px;
+  border-radius: 5px;
+  margin: 14px 0;
+}
+.legend div {
+  margin: 8px 0;
+}
+.catalog-link {
+  padding: 16px 21px;
+}
+.catalog-link > svg:first-child {
+  color: var(--muted);
+}
+.nav-item,
+.panel,
+.icon-btn,
+.secondary,
+.primary,
+.hero-button,
+.account-link,
+.case-picker label {
+  transition:
+    border-color 180ms ease-out,
+    transform 180ms ease-out;
+}
+a.panel:hover,
+.case-picker label:hover,
+.account-link:hover {
+  border-color: var(--muted);
+}
+.hero-button:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+.secondary,
+.primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+}
+.lab-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.case-picker,
+.account-card fieldset {
+  border: 0;
+  padding: 0;
+  min-width: 0;
+}
+.case-picker {
+  margin: 20px 0 4px;
+  display: grid;
+  gap: 10px;
+}
+.case-picker label {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 13px;
+  cursor: pointer;
+}
+.case-picker label:has(:checked) {
+  border-color: var(--accent);
+  background: var(--active);
+}
+.case-picker input {
+  accent-color: var(--accent);
+  margin-top: 4px;
+}
+.case-picker small,
+.identity small {
+  display: block;
+}
+.empty-state {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  min-height: 200px;
+  color: var(--muted);
+  text-align: center;
+  gap: 12px;
+  font-size: 14px;
+}
+.empty-state p {
+  max-width: 32ch;
+}
+.receipt {
+  margin-top: 18px;
+}
+.receipt-top {
+  font-size: 13px;
+}
+.receipt-top strong {
+  text-transform: capitalize;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 3px 7px;
+}
+.receipt p,
+.account-card p {
+  color: var(--muted);
+  margin: 12px 0 18px;
+}
+.receipt h3 {
+  font-size: 14px;
+  margin: 18px 0 8px;
+}
+.receipt li {
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  list-style: none;
+}
+.receipt li span {
+  color: var(--muted);
+  margin-right: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.actions {
+  flex-wrap: wrap;
+}
+.actions .secondary,
+.actions .primary {
+  margin: 0;
+}
+.notice {
+  background: var(--sub);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+}
+.account-wrap {
+  max-width: 460px;
+  margin: 20px auto;
+}
+.account-wrap > .text-link {
+  margin: 15px 0;
+}
+.account-card {
+  padding: clamp(20px, 3vw, 36px);
+  max-width: 590px;
+}
+.account-card h1 {
+  font-size: 35px;
+  margin-top: 18px;
+}
+.account-card form {
+  margin: 16px 0;
+}
+.account-card fieldset {
+  display: grid;
+  gap: 14px;
+}
+.account-card .primary,
+.account-card .secondary {
+  margin: 0;
+}
+.wide {
+  width: 100%;
+}
+.account-symbol,
+.initials {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--sub);
+}
+.account-card input,
+.account-card select {
+  width: 100%;
+}
+.form-switch,
+.account-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+.form-switch button {
+  font-size: 13px;
+  text-decoration: underline;
+}
+.account-card output {
+  display: block;
+  margin-top: 16px;
+  font-size: 14px;
+}
+.account-card output:empty {
+  display: none;
+}
+.identity {
+  gap: 12px;
+}
+.initials {
+  font-size: 22px;
+}
+.danger-section,
+.account-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 18px;
+}
+.skeleton {
+  animation: pulse 1s ease-out infinite alternate;
+}
+@keyframes pulse {
+  to {
+    opacity: 0.55;
+  }
+}
+@media (min-width: 761px) and (max-height: 780px) {
+  .sidebar {
+    padding-top: 16px;
+  }
+  .sidebar nav {
+    margin-top: 20px;
+  }
+  .nav-group + .nav-group {
+    margin-top: 12px;
+  }
+  .nav-item {
+    min-height: 32px;
+    padding-block: 5px;
+  }
+}
+@media (max-width: 1000px) {
+  .frame {
+    grid-template-columns: 190px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding-inline: 10px;
+  }
+  .content-card {
+    padding: 19px;
+  }
+  .lab-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 760px) {
+  .frame {
+    display: block;
+  }
+  .sidebar {
+    overflow: visible;
+    padding: 12px 18px;
+  }
+  .sidebar nav {
+    padding: 0;
+  }
+  .sidebar.expanded nav {
+    margin: 15px 0 4px;
+  }
+  .nav-group + .nav-group {
+    margin-top: 12px;
+  }
+  .top {
+    height: 48px;
+  }
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+  .lab-hero {
+    padding: 24px;
+    grid-template-columns: minmax(0, 1.6fr) minmax(100px, 0.7fr);
+  }
+  .lab-hero p {
+    max-width: 32ch;
+  }
+  main {
+    padding: 24px 16px;
+  }
+  .release-ref {
+    display: none;
+  }
+}
+@media (max-width: 490px) {
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+  .metric {
+    padding: 12px 16px;
+  }
+  .metric strong {
+    margin: 0;
+  }
+  .lab-hero {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+  }
+  .lab-hero h2 {
+    font-size: 36px;
+  }
+  .hero-label {
+    margin-right: 62px;
+  }
+  .section-caption {
+    margin-top: 22px;
+  }
+  .section-caption > span {
+    font-size: 11px;
+  }
+  .content-card {
+    padding: 18px;
+  }
+  .top .crumb {
+    min-width: 0;
+  }
+  .account-link {
+    font-size: 12px;
+  }
+  .nav-item {
+    min-height: 40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

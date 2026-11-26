@@ -1,0 +1,813 @@
+{
+  "$defs": {
+    "AttackOutcome": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact": {
+          "pattern": "^[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_.-]+)*\\.(json|md)$",
+          "title": "Artifact",
+          "type": "string"
+        },
+        "attack_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Attack Id",
+          "type": "string"
+        },
+        "available_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Available Evidence",
+          "type": "array"
+        },
+        "category": {
+          "enum": [
+            "direct",
+            "indirect",
+            "poisoned_documents",
+            "unauthorized_calls",
+            "argument_tampering",
+            "exfiltration",
+            "privilege_escalation"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "finding_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Finding Id"
+        },
+        "missing_evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Evidence",
+          "type": "array"
+        },
+        "next_verification": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Next Verification"
+        },
+        "reasons": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasons",
+          "type": "array"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "status": {
+          "$ref": "#/$defs/Status"
+        },
+        "submitted": {
+          "title": "Submitted",
+          "type": "boolean"
+        },
+        "verdict": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Verdict"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "attack_id",
+        "revision",
+        "category",
+        "status",
+        "submitted",
+        "verdict",
+        "finding_id",
+        "reasons",
+        "available_evidence",
+        "missing_evidence",
+        "next_verification",
+        "artifact"
+      ],
+      "title": "AttackOutcome",
+      "type": "object"
+    },
+    "Counts": {
+      "additionalProperties": false,
+      "properties": {
+        "blocked_or_not_observed": {
+          "minimum": 0,
+          "title": "Blocked Or Not Observed",
+          "type": "integer"
+        },
+        "completed": {
+          "minimum": 0,
+          "title": "Completed",
+          "type": "integer"
+        },
+        "distinct_findings": {
+          "minimum": 0,
+          "title": "Distinct Findings",
+          "type": "integer"
+        },
+        "failed": {
+          "minimum": 0,
+          "title": "Failed",
+          "type": "integer"
+        },
+        "indeterminate": {
+          "minimum": 0,
+          "title": "Indeterminate",
+          "type": "integer"
+        },
+        "loaded": {
+          "minimum": 0,
+          "title": "Loaded",
+          "type": "integer"
+        },
+        "observed_effects": {
+          "minimum": 0,
+          "title": "Observed Effects",
+          "type": "integer"
+        },
+        "prepared": {
+          "minimum": 0,
+          "title": "Prepared",
+          "type": "integer"
+        },
+        "recorded_executions": {
+          "minimum": 0,
+          "title": "Recorded Executions",
+          "type": "integer"
+        },
+        "severity_distribution": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "Critical",
+              "High",
+              "Medium",
+              "Low",
+              "Informational"
+            ]
+          },
+          "title": "Severity Distribution",
+          "type": "object"
+        },
+        "skipped": {
+          "minimum": 0,
+          "title": "Skipped",
+          "type": "integer"
+        },
+        "submitted": {
+          "minimum": 0,
+          "title": "Submitted",
+          "type": "integer"
+        },
+        "successful_attack_executions": {
+          "minimum": 0,
+          "title": "Successful Attack Executions",
+          "type": "integer"
+        },
+        "timed_out": {
+          "minimum": 0,
+          "title": "Timed Out",
+          "type": "integer"
+        },
+        "trace_events": {
+          "minimum": 0,
+          "title": "Trace Events",
+          "type": "integer"
+        },
+        "unevaluated": {
+          "minimum": 0,
+          "title": "Unevaluated",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "loaded",
+        "prepared",
+        "submitted",
+        "recorded_executions",
+        "completed",
+        "failed",
+        "timed_out",
+        "skipped",
+        "trace_events",
+        "successful_attack_executions",
+        "observed_effects",
+        "distinct_findings",
+        "blocked_or_not_observed",
+        "indeterminate",
+        "unevaluated",
+        "severity_distribution"
+      ],
+      "title": "Counts",
+      "type": "object"
+    },
+    "Dimension": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum": {
+          "enum": [
+            2.0,
+            4.0
+          ],
+          "maximum": 4,
+          "minimum": 2,
+          "title": "Maximum",
+          "type": "number"
+        },
+        "name": {
+          "enum": [
+            "observed_impact",
+            "exploitability",
+            "preconditions",
+            "scope"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "value": {
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "maximum",
+        "rationale"
+      ],
+      "title": "Dimension",
+      "type": "object"
+    },
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact": {
+          "pattern": "^[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_.-]+)*\\.(json|md)$",
+          "title": "Artifact",
+          "type": "string"
+        },
+        "attack_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Attack Id",
+          "type": "string"
+        },
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "source_pointer": {
+          "title": "Source Pointer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact",
+        "pointer",
+        "source_pointer",
+        "attack_id",
+        "revision",
+        "purpose"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "attack_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Attack Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "direct",
+            "indirect",
+            "poisoned_documents",
+            "unauthorized_calls",
+            "argument_tampering",
+            "exfiltration",
+            "privilege_escalation"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "effect": {
+          "title": "Effect",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "expected_boundary": {
+          "title": "Expected Boundary",
+          "type": "string"
+        },
+        "expected_fixed_behavior": {
+          "title": "Expected Fixed Behavior",
+          "type": "string"
+        },
+        "reproduction": {
+          "title": "Reproduction",
+          "type": "string"
+        },
+        "resource": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Resource",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "reader",
+            "staff",
+            "admin"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "supplied_content": {
+          "title": "Supplied Content",
+          "type": "boolean"
+        },
+        "tool": {
+          "enum": [
+            "search_documents",
+            "read_document",
+            "send_message",
+            "update_document",
+            "change_access_level"
+          ],
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attack_id",
+        "revision",
+        "category",
+        "tool",
+        "resource",
+        "effect",
+        "expected_boundary",
+        "supplied_content",
+        "role",
+        "evidence",
+        "reproduction",
+        "expected_fixed_behavior"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Recommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        },
+        "control": {
+          "title": "Control",
+          "type": "string"
+        },
+        "location": {
+          "title": "Location",
+          "type": "string"
+        },
+        "problem": {
+          "title": "Problem",
+          "type": "string"
+        },
+        "remediation_evidence": {
+          "title": "Remediation Evidence",
+          "type": "string"
+        },
+        "status": {
+          "default": "Proposed; not implemented or verified",
+          "title": "Status",
+          "type": "string"
+        },
+        "test": {
+          "title": "Test",
+          "type": "string"
+        }
+      },
+      "required": [
+        "problem",
+        "boundary",
+        "control",
+        "location",
+        "test",
+        "remediation_evidence",
+        "status"
+      ],
+      "title": "Recommendation",
+      "type": "object"
+    },
+    "SecurityFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "associated_attack_ids": {
+          "items": {
+            "maxLength": 128,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "title": "Associated Attack Ids",
+          "type": "array"
+        },
+        "categories": {
+          "items": {
+            "enum": [
+              "direct",
+              "indirect",
+              "poisoned_documents",
+              "unauthorized_calls",
+              "argument_tampering",
+              "exfiltration",
+              "privilege_escalation"
+            ],
+            "type": "string"
+          },
+          "title": "Categories",
+          "type": "array"
+        },
+        "confidence": {
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "confidence_rationale": {
+          "title": "Confidence Rationale",
+          "type": "string"
+        },
+        "finding_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "grouping_rationale": {
+          "title": "Grouping Rationale",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "mechanism": {
+          "title": "Mechanism",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/Observation"
+          },
+          "title": "Observations",
+          "type": "array"
+        },
+        "recommendation": {
+          "$ref": "#/$defs/Recommendation"
+        },
+        "resource": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Resource",
+          "type": "string"
+        },
+        "scan_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Scan Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "api-1.0",
+          "default": "api-1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "tool": {
+          "enum": [
+            "search_documents",
+            "read_document",
+            "send_message",
+            "update_document",
+            "change_access_level"
+          ],
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "scan_id",
+        "finding_id",
+        "title",
+        "categories",
+        "severity",
+        "confidence",
+        "confidence_rationale",
+        "tool",
+        "resource",
+        "grouping_rationale",
+        "mechanism",
+        "associated_attack_ids",
+        "observations",
+        "recommendation",
+        "limitations"
+      ],
+      "title": "SecurityFinding",
+      "type": "object"
+    },
+    "Severity": {
+      "additionalProperties": false,
+      "properties": {
+        "band": {
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "title": "Band",
+          "type": "string"
+        },
+        "dimensions": {
+          "items": {
+            "$ref": "#/$defs/Dimension"
+          },
+          "title": "Dimensions",
+          "type": "array"
+        },
+        "label": {
+          "const": "Custom CVSS-inspired severity score",
+          "title": "Label",
+          "type": "string"
+        },
+        "score": {
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "label",
+        "score",
+        "band",
+        "dimensions"
+      ],
+      "title": "Severity",
+      "type": "object"
+    },
+    "SourceProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digests": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Artifact Digests",
+          "type": "object"
+        },
+        "corpus_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Corpus Digest",
+          "type": "string"
+        },
+        "fixture_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Fixture Digest",
+          "type": "string"
+        },
+        "report_format": {
+          "const": "report-1.0",
+          "title": "Report Format",
+          "type": "string"
+        },
+        "report_generated_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$",
+          "title": "Report Generated At",
+          "type": "string"
+        },
+        "report_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Report Id",
+          "type": "string"
+        },
+        "scan_format": {
+          "const": "scan-1.0",
+          "title": "Scan Format",
+          "type": "string"
+        },
+        "scope": {
+          "const": "local_synthetic_sandbox",
+          "default": "local_synthetic_sandbox",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scan_format",
+        "report_format",
+        "report_id",
+        "report_generated_at",
+        "artifact_digests",
+        "corpus_digest",
+        "fixture_digest",
+        "scope"
+      ],
+      "title": "SourceProvenance",
+      "type": "object"
+    },
+    "Status": {
+      "enum": [
+        "COMPLETED",
+        "FAILED",
+        "TIMED_OUT",
+        "SKIPPED"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "Verdict": {
+      "enum": [
+        "SUCCESS",
+        "BLOCKED_OR_NOT_OBSERVED",
+        "INDETERMINATE"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "$id": "urn:agent-security-scanner:api:v1:structured-report",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "attack_outcomes": {
+      "items": {
+        "$ref": "#/$defs/AttackOutcome"
+      },
+      "title": "Attack Outcomes",
+      "type": "array"
+    },
+    "blocked_attacks": {
+      "items": {
+        "$ref": "#/$defs/AttackOutcome"
+      },
+      "title": "Blocked Attacks",
+      "type": "array"
+    },
+    "counts": {
+      "$ref": "#/$defs/Counts"
+    },
+    "execution_issues": {
+      "items": {
+        "$ref": "#/$defs/AttackOutcome"
+      },
+      "title": "Execution Issues",
+      "type": "array"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/SecurityFinding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "generated_at": {
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/SourceProvenance"
+    },
+    "report_id": {
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title": "Report Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "api-1.0",
+      "default": "api-1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "source_scan_id": {
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title": "Source Scan Id",
+      "type": "string"
+    },
+    "source_target": {
+      "const": "sandbox",
+      "title": "Source Target",
+      "type": "string"
+    },
+    "unresolved_observations": {
+      "items": {
+        "$ref": "#/$defs/AttackOutcome"
+      },
+      "title": "Unresolved Observations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schema_version",
+    "report_id",
+    "source_scan_id",
+    "source_target",
+    "generated_at",
+    "provenance",
+    "counts",
+    "findings",
+    "unresolved_observations",
+    "blocked_attacks",
+    "execution_issues",
+    "attack_outcomes",
+    "limitations"
+  ],
+  "title": "StructuredReport",
+  "type": "object"
+}

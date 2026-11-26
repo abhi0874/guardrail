@@ -1,0 +1,97 @@
+/* Shared dimensions for workspace fields and actions. */
+:root {
+  --control-height: 44px;
+  --control-radius: 10px;
+  --control-border: #7c9181;
+  --control-arrow: #356646;
+  --control-padding: 12px;
+  --control-font-size: 14px;
+  --control-font-weight: 600;
+}
+
+:where(input:not([type="radio"], [type="checkbox"]), select),
+.primary,
+.secondary {
+  min-block-size: var(--control-height);
+  border: 1px solid transparent;
+  border-radius: var(--control-radius);
+  padding: 0 var(--control-padding);
+  font-size: var(--control-font-size);
+  font-weight: var(--control-font-weight);
+  line-height: 1.25;
+}
+
+:where(input:not([type="radio"], [type="checkbox"]), select),
+.secondary {
+  border-color: var(--control-border);
+}
+
+:where(input:not([type="radio"], [type="checkbox"]), select) {
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  background-color: var(--panel);
+  color: var(--text);
+}
+
+select {
+  appearance: none;
+  padding-inline-end: 36px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--control-arrow) 50%),
+    linear-gradient(135deg, var(--control-arrow) 50%, transparent 50%);
+  background-repeat: no-repeat;
+  background-position:
+    right calc(var(--control-padding) + 5px) center,
+    right var(--control-padding) center;
+  background-size: 5px 5px;
+}
+
+@media (forced-colors: active) {
+  select {
+    appearance: auto;
+    background-image: none;
+    padding-inline-end: var(--control-padding);
+  }
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--sub);
+}
+
+.filters label {
+  flex: 1 1 132px;
+  min-inline-size: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 18px;
+}
+
+.filters label:first-child {
+  flex: 2 1 180px;
+}
+
+.filters :is(input, select, button) {
+  block-size: var(--control-height);
+}
+
+.filters button {
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .filters {
+    padding: 12px;
+  }
+
+  .filters label:first-child {
+    flex-basis: 100%;
+  }
+}

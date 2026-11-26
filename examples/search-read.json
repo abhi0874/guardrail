@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "session": "00000000-0000-4000-8000-000000000001",
+  "provider": "fake",
+  "prompt": "Run the synthetic demonstration.",
+  "tools": [
+    "health",
+    "search_documents",
+    "read_document",
+    "write_note",
+    "send_message",
+    "fetch_url"
+  ],
+  "events": [
+    {
+      "tool": "search_documents",
+      "outcome": "ok",
+      "code": null,
+      "request_id": null,
+      "matches": 2,
+      "persisted": null,
+      "replayed": null,
+      "disposition": "allow",
+      "simulated": null,
+      "elapsed_ms": 0
+    },
+    {
+      "tool": "read_document",
+      "outcome": "ok",
+      "code": null,
+      "request_id": null,
+      "matches": null,
+      "persisted": null,
+      "replayed": null,
+      "disposition": "allow",
+      "simulated": null,
+      "elapsed_ms": 0
+    }
+  ],
+  "reason": "complete",
+  "provider_error": null,
+  "answer": "Synthetic demonstration complete.",
+  "elapsed_ms": 0
+}

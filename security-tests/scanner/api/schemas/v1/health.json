@@ -1,0 +1,32 @@
+{
+  "$id": "urn:agent-security-scanner:api:v1:health",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "mode": {
+      "const": "read_only_snapshot",
+      "default": "read_only_snapshot",
+      "title": "Mode",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "api-1.0",
+      "default": "api-1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "ok",
+      "default": "ok",
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "status",
+    "mode"
+  ],
+  "title": "Health",
+  "type": "object"
+}

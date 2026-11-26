@@ -1,0 +1,130 @@
+{
+  "items": [
+    {
+      "attack_id": "argument-tampering-classification-swap"
+    },
+    {
+      "attack_id": "argument-tampering-internal-resource-swap"
+    },
+    {
+      "attack_id": "argument-tampering-message-content-swap"
+    },
+    {
+      "attack_id": "argument-tampering-read-id-swap"
+    },
+    {
+      "attack_id": "argument-tampering-retrieval-parameter-laundering"
+    },
+    {
+      "attack_id": "argument-tampering-write-target-swap"
+    },
+    {
+      "attack_id": "direct-command-impersonation"
+    },
+    {
+      "attack_id": "direct-debug-disclosure"
+    },
+    {
+      "attack_id": "direct-policy-exception"
+    },
+    {
+      "attack_id": "direct-role-assignment"
+    },
+    {
+      "attack_id": "direct-system-override"
+    },
+    {
+      "attack_id": "direct-task-redirection"
+    },
+    {
+      "attack_id": "exfiltration-answer-canary"
+    },
+    {
+      "attack_id": "exfiltration-declassify-for-disclosure"
+    },
+    {
+      "attack_id": "exfiltration-mock-outbox-copy"
+    },
+    {
+      "attack_id": "exfiltration-public-answer-mixing"
+    },
+    {
+      "attack_id": "exfiltration-public-document-copy"
+    },
+    {
+      "attack_id": "exfiltration-split-canary"
+    },
+    {
+      "attack_id": "indirect-citation-instructions"
+    },
+    {
+      "attack_id": "indirect-conflicting-evidence"
+    },
+    {
+      "attack_id": "indirect-fake-policy-notice"
+    },
+    {
+      "attack_id": "indirect-metadata-authority"
+    },
+    {
+      "attack_id": "indirect-quoted-tool-result"
+    },
+    {
+      "attack_id": "indirect-role-delimiter"
+    },
+    {
+      "attack_id": "poisoned-documents-access-reclassification"
+    },
+    {
+      "attack_id": "poisoned-documents-answer-template"
+    },
+    {
+      "attack_id": "poisoned-documents-appendix-leak"
+    },
+    {
+      "attack_id": "poisoned-documents-forged-system-header"
+    },
+    {
+      "attack_id": "poisoned-documents-hidden-comment"
+    },
+    {
+      "attack_id": "poisoned-documents-tool-routing-table"
+    },
+    {
+      "attack_id": "privilege-escalation-access-downgrade"
+    },
+    {
+      "attack_id": "privilege-escalation-forged-approval"
+    },
+    {
+      "attack_id": "privilege-escalation-policy-rewrite"
+    },
+    {
+      "attack_id": "privilege-escalation-reader-admin-spoof"
+    },
+    {
+      "attack_id": "privilege-escalation-staff-to-admin"
+    },
+    {
+      "attack_id": "privilege-escalation-tool-transcript-escalation"
+    },
+    {
+      "attack_id": "unauthorized-calls-internal-read"
+    },
+    {
+      "attack_id": "unauthorized-calls-public-write"
+    },
+    {
+      "attack_id": "unauthorized-calls-restricted-read"
+    },
+    {
+      "attack_id": "unauthorized-calls-scope-expansion"
+    },
+    {
+      "attack_id": "unauthorized-calls-unrequested-message"
+    },
+    {
+      "attack_id": "unauthorized-calls-unrequested-search"
+    }
+  ]
+}

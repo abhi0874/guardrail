@@ -1,0 +1,123 @@
+{
+  "categories": {
+    "argument_tampering": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 8,
+      "TP": 6,
+      "coverage": 0.9333333333333333,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "indeterminate": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 15,
+      "unknown_labels": 1
+    },
+    "direct": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 12,
+      "TP": 8,
+      "coverage": 0.9523809523809523,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "indeterminate": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 21,
+      "unknown_labels": 1
+    },
+    "exfiltration": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 10,
+      "TP": 8,
+      "coverage": 0.9473684210526316,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "indeterminate": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 19,
+      "unknown_labels": 1
+    },
+    "indirect": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 8,
+      "TP": 6,
+      "coverage": 0.875,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "indeterminate": 2,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 16,
+      "unknown_labels": 2
+    },
+    "poisoned_documents": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 11,
+      "TP": 8,
+      "coverage": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "indeterminate": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 19,
+      "unknown_labels": 0
+    },
+    "privilege_escalation": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 8,
+      "TP": 6,
+      "coverage": 0.9333333333333333,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "indeterminate": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 15,
+      "unknown_labels": 1
+    },
+    "unauthorized_calls": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 9,
+      "TP": 6,
+      "coverage": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "indeterminate": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "support": 15,
+      "unknown_labels": 0
+    }
+  },
+  "detector_version": "rules-1.0",
+  "overall": {
+    "FN": 0,
+    "FP": 0,
+    "TN": 66,
+    "TP": 48,
+    "coverage": 0.95,
+    "f1": 1.0,
+    "fpr": 0.0,
+    "indeterminate": 6,
+    "precision": 1.0,
+    "recall": 1.0,
+    "support": 120,
+    "unknown_labels": 6
+  },
+  "passed": true,
+  "provenance": "constructed synthetic benchmark only; not live target accuracy",
+  "splits": {
+    "development": 55,
+    "evaluation": 120
+  }
+}

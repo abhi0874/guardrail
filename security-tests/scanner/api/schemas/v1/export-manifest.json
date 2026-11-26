@@ -1,0 +1,338 @@
+{
+  "$defs": {
+    "Counts": {
+      "additionalProperties": false,
+      "properties": {
+        "blocked_or_not_observed": {
+          "minimum": 0,
+          "title": "Blocked Or Not Observed",
+          "type": "integer"
+        },
+        "completed": {
+          "minimum": 0,
+          "title": "Completed",
+          "type": "integer"
+        },
+        "distinct_findings": {
+          "minimum": 0,
+          "title": "Distinct Findings",
+          "type": "integer"
+        },
+        "failed": {
+          "minimum": 0,
+          "title": "Failed",
+          "type": "integer"
+        },
+        "indeterminate": {
+          "minimum": 0,
+          "title": "Indeterminate",
+          "type": "integer"
+        },
+        "loaded": {
+          "minimum": 0,
+          "title": "Loaded",
+          "type": "integer"
+        },
+        "observed_effects": {
+          "minimum": 0,
+          "title": "Observed Effects",
+          "type": "integer"
+        },
+        "prepared": {
+          "minimum": 0,
+          "title": "Prepared",
+          "type": "integer"
+        },
+        "recorded_executions": {
+          "minimum": 0,
+          "title": "Recorded Executions",
+          "type": "integer"
+        },
+        "severity_distribution": {
+          "additionalProperties": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "propertyNames": {
+            "enum": [
+              "Critical",
+              "High",
+              "Medium",
+              "Low",
+              "Informational"
+            ]
+          },
+          "title": "Severity Distribution",
+          "type": "object"
+        },
+        "skipped": {
+          "minimum": 0,
+          "title": "Skipped",
+          "type": "integer"
+        },
+        "submitted": {
+          "minimum": 0,
+          "title": "Submitted",
+          "type": "integer"
+        },
+        "successful_attack_executions": {
+          "minimum": 0,
+          "title": "Successful Attack Executions",
+          "type": "integer"
+        },
+        "timed_out": {
+          "minimum": 0,
+          "title": "Timed Out",
+          "type": "integer"
+        },
+        "trace_events": {
+          "minimum": 0,
+          "title": "Trace Events",
+          "type": "integer"
+        },
+        "unevaluated": {
+          "minimum": 0,
+          "title": "Unevaluated",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "loaded",
+        "prepared",
+        "submitted",
+        "recorded_executions",
+        "completed",
+        "failed",
+        "timed_out",
+        "skipped",
+        "trace_events",
+        "successful_attack_executions",
+        "observed_effects",
+        "distinct_findings",
+        "blocked_or_not_observed",
+        "indeterminate",
+        "unevaluated",
+        "severity_distribution"
+      ],
+      "title": "Counts",
+      "type": "object"
+    },
+    "Resource": {
+      "additionalProperties": false,
+      "properties": {
+        "bytes": {
+          "minimum": 0,
+          "title": "Bytes",
+          "type": "integer"
+        },
+        "endpoint": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Endpoint"
+        },
+        "media_type": {
+          "enum": [
+            "application/json",
+            "text/markdown"
+          ],
+          "title": "Media Type",
+          "type": "string"
+        },
+        "path": {
+          "pattern": "^[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_.-]+)*\\.(json|md)$",
+          "title": "Path",
+          "type": "string"
+        },
+        "schema_name": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Schema Name"
+        },
+        "sha256": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "endpoint",
+        "schema_name",
+        "sha256",
+        "bytes",
+        "media_type"
+      ],
+      "title": "Resource",
+      "type": "object"
+    },
+    "SourceProvenance": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digests": {
+          "additionalProperties": {
+            "pattern": "^[a-f0-9]{64}$",
+            "type": "string"
+          },
+          "title": "Artifact Digests",
+          "type": "object"
+        },
+        "corpus_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Corpus Digest",
+          "type": "string"
+        },
+        "fixture_digest": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Fixture Digest",
+          "type": "string"
+        },
+        "report_format": {
+          "const": "report-1.0",
+          "title": "Report Format",
+          "type": "string"
+        },
+        "report_generated_at": {
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?(?:Z|[+-]\\d{2}:\\d{2})$",
+          "title": "Report Generated At",
+          "type": "string"
+        },
+        "report_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Report Id",
+          "type": "string"
+        },
+        "scan_format": {
+          "const": "scan-1.0",
+          "title": "Scan Format",
+          "type": "string"
+        },
+        "scope": {
+          "const": "local_synthetic_sandbox",
+          "default": "local_synthetic_sandbox",
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scan_format",
+        "report_format",
+        "report_id",
+        "report_generated_at",
+        "artifact_digests",
+        "corpus_digest",
+        "fixture_digest",
+        "scope"
+      ],
+      "title": "SourceProvenance",
+      "type": "object"
+    }
+  },
+  "$id": "urn:agent-security-scanner:api:v1:export-manifest",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "counts": {
+      "$ref": "#/$defs/Counts"
+    },
+    "export_format": {
+      "const": "static-1.0",
+      "default": "static-1.0",
+      "title": "Export Format",
+      "type": "string"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Limitations",
+      "type": "array"
+    },
+    "provenance": {
+      "$ref": "#/$defs/SourceProvenance"
+    },
+    "resources": {
+      "items": {
+        "$ref": "#/$defs/Resource"
+      },
+      "title": "Resources",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "api-1.0",
+      "default": "api-1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "schemas": {
+      "patternProperties": {
+        "^[a-z0-9]+(?:-[a-z0-9]+)*$": {
+          "pattern": "^[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_.-]+)*\\.(json|md)$",
+          "type": "string"
+        }
+      },
+      "propertyNames": {
+        "maxLength": 128
+      },
+      "title": "Schemas",
+      "type": "object"
+    },
+    "scope": {
+      "const": "local_synthetic_sandbox",
+      "default": "local_synthetic_sandbox",
+      "title": "Scope",
+      "type": "string"
+    },
+    "source_report_id": {
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title": "Source Report Id",
+      "type": "string"
+    },
+    "source_report_version": {
+      "const": "report-1.0",
+      "title": "Source Report Version",
+      "type": "string"
+    },
+    "source_scan_id": {
+      "maxLength": 128,
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "title": "Source Scan Id",
+      "type": "string"
+    },
+    "static_replay_disclosure": {
+      "title": "Static Replay Disclosure",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "export_format",
+    "source_scan_id",
+    "source_report_id",
+    "source_report_version",
+    "scope",
+    "counts",
+    "resources",
+    "schemas",
+    "provenance",
+    "static_replay_disclosure",
+    "limitations"
+  ],
+  "title": "Manifest",
+  "type": "object"
+}

@@ -1,0 +1,15 @@
+tests/chaos/test_step9_faults.py
+tests/integration/test_audit_fail_closed.py
+tests/integration/test_idempotency_recovery.py
+tests/integration/test_idempotency_concurrency.py
+tests/integration/test_idempotency_failures.py
+tests/integration/test_http_isolation.py
+tests/integration/test_http_failures.py
+tests/security/test_http_security.py
+tests/security/test_fetch_url.py::test_fetch_with_resilience
+tests/unit/test_resilience_executor.py
+tests/unit/test_resilience_limits.py
+tests/unit/test_rate_limiting.py
+tests/integration/test_state_change_pipeline.py::test_unsafe_dependency_one_attempt
+tests/integration/test_rate_limit_stdio.py
+tests/security/test_step8_fix.py::test_reservation_excludes_competitors_and_replacement

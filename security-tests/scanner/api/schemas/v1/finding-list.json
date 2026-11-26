@@ -1,0 +1,435 @@
+{
+  "$defs": {
+    "Dimension": {
+      "additionalProperties": false,
+      "properties": {
+        "maximum": {
+          "enum": [
+            2.0,
+            4.0
+          ],
+          "maximum": 4,
+          "minimum": 2,
+          "title": "Maximum",
+          "type": "number"
+        },
+        "name": {
+          "enum": [
+            "observed_impact",
+            "exploitability",
+            "preconditions",
+            "scope"
+          ],
+          "title": "Name",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        },
+        "value": {
+          "maximum": 4,
+          "minimum": 0,
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "maximum",
+        "rationale"
+      ],
+      "title": "Dimension",
+      "type": "object"
+    },
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact": {
+          "pattern": "^[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_.-]+)*\\.(json|md)$",
+          "title": "Artifact",
+          "type": "string"
+        },
+        "attack_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Attack Id",
+          "type": "string"
+        },
+        "pointer": {
+          "title": "Pointer",
+          "type": "string"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "source_pointer": {
+          "title": "Source Pointer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact",
+        "pointer",
+        "source_pointer",
+        "attack_id",
+        "revision",
+        "purpose"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "attack_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Attack Id",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            "direct",
+            "indirect",
+            "poisoned_documents",
+            "unauthorized_calls",
+            "argument_tampering",
+            "exfiltration",
+            "privilege_escalation"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "effect": {
+          "title": "Effect",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/EvidenceReference"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "expected_boundary": {
+          "title": "Expected Boundary",
+          "type": "string"
+        },
+        "expected_fixed_behavior": {
+          "title": "Expected Fixed Behavior",
+          "type": "string"
+        },
+        "reproduction": {
+          "title": "Reproduction",
+          "type": "string"
+        },
+        "resource": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Resource",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "reader",
+            "staff",
+            "admin"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "supplied_content": {
+          "title": "Supplied Content",
+          "type": "boolean"
+        },
+        "tool": {
+          "enum": [
+            "search_documents",
+            "read_document",
+            "send_message",
+            "update_document",
+            "change_access_level"
+          ],
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "attack_id",
+        "revision",
+        "category",
+        "tool",
+        "resource",
+        "effect",
+        "expected_boundary",
+        "supplied_content",
+        "role",
+        "evidence",
+        "reproduction",
+        "expected_fixed_behavior"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "Recommendation": {
+      "additionalProperties": false,
+      "properties": {
+        "boundary": {
+          "title": "Boundary",
+          "type": "string"
+        },
+        "control": {
+          "title": "Control",
+          "type": "string"
+        },
+        "location": {
+          "title": "Location",
+          "type": "string"
+        },
+        "problem": {
+          "title": "Problem",
+          "type": "string"
+        },
+        "remediation_evidence": {
+          "title": "Remediation Evidence",
+          "type": "string"
+        },
+        "status": {
+          "default": "Proposed; not implemented or verified",
+          "title": "Status",
+          "type": "string"
+        },
+        "test": {
+          "title": "Test",
+          "type": "string"
+        }
+      },
+      "required": [
+        "problem",
+        "boundary",
+        "control",
+        "location",
+        "test",
+        "remediation_evidence",
+        "status"
+      ],
+      "title": "Recommendation",
+      "type": "object"
+    },
+    "SecurityFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "associated_attack_ids": {
+          "items": {
+            "maxLength": 128,
+            "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+            "type": "string"
+          },
+          "title": "Associated Attack Ids",
+          "type": "array"
+        },
+        "categories": {
+          "items": {
+            "enum": [
+              "direct",
+              "indirect",
+              "poisoned_documents",
+              "unauthorized_calls",
+              "argument_tampering",
+              "exfiltration",
+              "privilege_escalation"
+            ],
+            "type": "string"
+          },
+          "title": "Categories",
+          "type": "array"
+        },
+        "confidence": {
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "confidence_rationale": {
+          "title": "Confidence Rationale",
+          "type": "string"
+        },
+        "finding_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Finding Id",
+          "type": "string"
+        },
+        "grouping_rationale": {
+          "title": "Grouping Rationale",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Limitations",
+          "type": "array"
+        },
+        "mechanism": {
+          "title": "Mechanism",
+          "type": "string"
+        },
+        "observations": {
+          "items": {
+            "$ref": "#/$defs/Observation"
+          },
+          "title": "Observations",
+          "type": "array"
+        },
+        "recommendation": {
+          "$ref": "#/$defs/Recommendation"
+        },
+        "resource": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Resource",
+          "type": "string"
+        },
+        "scan_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+          "title": "Scan Id",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "api-1.0",
+          "default": "api-1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/$defs/Severity"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "tool": {
+          "enum": [
+            "search_documents",
+            "read_document",
+            "send_message",
+            "update_document",
+            "change_access_level"
+          ],
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "scan_id",
+        "finding_id",
+        "title",
+        "categories",
+        "severity",
+        "confidence",
+        "confidence_rationale",
+        "tool",
+        "resource",
+        "grouping_rationale",
+        "mechanism",
+        "associated_attack_ids",
+        "observations",
+        "recommendation",
+        "limitations"
+      ],
+      "title": "SecurityFinding",
+      "type": "object"
+    },
+    "Severity": {
+      "additionalProperties": false,
+      "properties": {
+        "band": {
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "title": "Band",
+          "type": "string"
+        },
+        "dimensions": {
+          "items": {
+            "$ref": "#/$defs/Dimension"
+          },
+          "title": "Dimensions",
+          "type": "array"
+        },
+        "label": {
+          "const": "Custom CVSS-inspired severity score",
+          "title": "Label",
+          "type": "string"
+        },
+        "score": {
+          "maximum": 10,
+          "minimum": 0,
+          "title": "Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "label",
+        "score",
+        "band",
+        "dimensions"
+      ],
+      "title": "Severity",
+      "type": "object"
+    }
+  },
+  "$id": "urn:agent-security-scanner:api:v1:finding-list",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/SecurityFinding"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "api-1.0",
+      "default": "api-1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "total": {
+      "minimum": 0,
+      "title": "Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schema_version",
+    "total",
+    "items"
+  ],
+  "title": "FindingList",
+  "type": "object"
+}

@@ -1,0 +1,28 @@
+{
+  "$id": "urn:agent-security-scanner:api:v1:error",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "title": "Code",
+      "type": "string"
+    },
+    "message": {
+      "title": "Message",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "api-1.0",
+      "default": "api-1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "code",
+    "message"
+  ],
+  "title": "ErrorResponse",
+  "type": "object"
+}

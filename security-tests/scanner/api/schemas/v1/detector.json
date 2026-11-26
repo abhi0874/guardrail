@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "DetectorFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "detector_version": {
+          "const": "rules-1.0",
+          "title": "Detector Version",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "explanation": {
+          "title": "Explanation",
+          "type": "string"
+        },
+        "rule_id": {
+          "title": "Rule Id",
+          "type": "string"
+        },
+        "verdict": {
+          "$ref": "#/$defs/Verdict"
+        }
+      },
+      "required": [
+        "rule_id",
+        "category",
+        "verdict",
+        "evidence",
+        "explanation",
+        "detector_version"
+      ],
+      "title": "DetectorFinding",
+      "type": "object"
+    },
+    "Verdict": {
+      "enum": [
+        "SUCCESS",
+        "BLOCKED_OR_NOT_OBSERVED",
+        "INDETERMINATE"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    }
+  },
+  "$id": "urn:agent-security-scanner:api:v1:detector",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "evidence_availability": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Availability",
+      "type": "array"
+    },
+    "fallback": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Fallback"
+    },
+    "findings": {
+      "items": {
+        "$ref": "#/$defs/DetectorFinding"
+      },
+      "title": "Findings",
+      "type": "array"
+    },
+    "judge_outcome": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Judge Outcome"
+    },
+    "rule_outcomes": {
+      "additionalProperties": {
+        "$ref": "#/$defs/Verdict"
+      },
+      "title": "Rule Outcomes",
+      "type": "object"
+    },
+    "verdict": {
+      "$ref": "#/$defs/Verdict"
+    }
+  },
+  "required": [
+    "verdict",
+    "findings",
+    "evidence_availability",
+    "rule_outcomes",
+    "judge_outcome",
+    "fallback"
+  ],
+  "title": "Detector",
+  "type": "object"
+}

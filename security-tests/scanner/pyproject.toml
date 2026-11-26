@@ -1,0 +1,46 @@
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+license = "Apache-2.0"
+name = "agent-security-scanner"
+version = "0.1.0"
+description = "Passive detector, offline benchmark, and evidence contracts"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "jsonschema==4.23.0",
+    "pydantic==2.14.2",
+]
+
+[dependency-groups]
+dev = [
+  "mypy==1.15.0",
+  "types-jsonschema==4.23.0.20241208",
+  "pytest==9.2.0",
+  "ruff==0.11.13",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["core/agent_security_scanner", "api/scanner_api"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"data/detector_validation" = "agent_security_scanner/_bundle/data/detector_validation"
+"api/schemas" = "agent_security_scanner/_bundle/api/schemas"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-config --strict-markers"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["core", "api"]

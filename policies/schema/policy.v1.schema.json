@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "Equality": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Field",
+          "type": "string"
+        },
+        "op": {
+          "const": "equals",
+          "title": "Op",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "boolean"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "op",
+        "field",
+        "value"
+      ],
+      "title": "Equality",
+      "type": "object"
+    },
+    "IntegerRange": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Field",
+          "type": "string"
+        },
+        "maximum": {
+          "title": "Maximum",
+          "type": "integer"
+        },
+        "minimum": {
+          "title": "Minimum",
+          "type": "integer"
+        },
+        "op": {
+          "const": "integer_range",
+          "title": "Op",
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "field",
+        "minimum",
+        "maximum"
+      ],
+      "title": "IntegerRange",
+      "type": "object"
+    },
+    "Membership": {
+      "additionalProperties": false,
+      "properties": {
+        "field": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Field",
+          "type": "string"
+        },
+        "op": {
+          "const": "one_of",
+          "title": "Op",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "boolean"
+              }
+            ]
+          },
+          "maxItems": 128,
+          "minItems": 1,
+          "title": "Values",
+          "type": "array"
+        }
+      },
+      "required": [
+        "op",
+        "field",
+        "values"
+      ],
+      "title": "Membership",
+      "type": "object"
+    },
+    "Rule": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "enum": [
+            "permit",
+            "deny"
+          ],
+          "title": "Action",
+          "type": "string"
+        },
+        "approval_required": {
+          "title": "Approval Required",
+          "type": "boolean"
+        },
+        "constraints": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "equals": "#/$defs/Equality",
+                "integer_range": "#/$defs/IntegerRange",
+                "one_of": "#/$defs/Membership"
+              },
+              "propertyName": "op"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/Equality"
+              },
+              {
+                "$ref": "#/$defs/Membership"
+              },
+              {
+                "$ref": "#/$defs/IntegerRange"
+              }
+            ]
+          },
+          "title": "Constraints",
+          "type": "array"
+        },
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 256,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "principals": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Principals",
+          "type": "array"
+        },
+        "roles": {
+          "items": {
+            "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+            "type": "string"
+          },
+          "title": "Roles",
+          "type": "array"
+        },
+        "tool": {
+          "pattern": "^[a-z][a-z0-9_-]{0,63}$",
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "tool",
+        "action",
+        "principals",
+        "roles",
+        "constraints",
+        "approval_required"
+      ],
+      "title": "Rule",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "default_action": {
+      "const": "deny",
+      "title": "Default Action",
+      "type": "string"
+    },
+    "rules": {
+      "items": {
+        "$ref": "#/$defs/Rule"
+      },
+      "maxItems": 128,
+      "title": "Rules",
+      "type": "array"
+    },
+    "schema_version": {
+      "const": "1",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "default_action",
+    "rules"
+  ],
+  "title": "Document",
+  "type": "object"
+}

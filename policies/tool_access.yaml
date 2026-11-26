@@ -1,0 +1,40 @@
+schema_version: "1"
+default_action: deny
+rules:
+  - tool: health
+    action: permit
+    principals: [local-anonymous, local-capability]
+    roles: []
+    constraints: []
+    approval_required: false
+    description: Read the installed service health information.
+  - tool: search_documents
+    action: permit
+    principals: [local-anonymous, local-capability]
+    roles: []
+    constraints: [{op: integer_range, field: limit, minimum: 1, maximum: 5}]
+    approval_required: false
+  - tool: read_document
+    action: permit
+    principals: [local-anonymous, local-capability]
+    roles: []
+    constraints: [{op: one_of, field: document_id, values: [stdio-guide, retry-policy, incident-runbook, approval-guide]}]
+    approval_required: false
+  - tool: write_note
+    action: permit
+    principals: [local-anonymous, local-capability]
+    roles: []
+    constraints: []
+    approval_required: false
+  - tool: send_message
+    action: permit
+    principals: [local-anonymous, local-capability]
+    roles: []
+    constraints: [{op: one_of, field: recipient, values: [ops-lab, docs-lab]}]
+    approval_required: true
+  - tool: fetch_url
+    action: permit
+    principals: [local-anonymous, local-capability]
+    roles: []
+    constraints: []
+    approval_required: false
