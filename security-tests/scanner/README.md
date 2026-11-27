@@ -13,3 +13,5 @@ uv run --frozen pytest -q
 The four constructed examples demonstrate verdict semantics. The separate frozen benchmark has 55 development cases and 120 evaluation cases. Eight evaluation rows share exact detector inputs with development rows. The evaluator checks file hashes and split membership. It prints the full evaluation and the 112-row subset with no exact development-input matches. The wheel also contains the benchmark data and public JSON schemas.
 
 See [detector methodology](DETECTOR-METHODOLOGY.md) for coverage and limitations. The reference application, external-target adapters, attack launcher and raw saved runs are excluded. The dashboard displays a reduced historical record that omits submitted payloads.
+
+For an installed distribution, use a separate Python 3.11 environment and run `guardrail-offline-scanner validate` to evaluate the bundled benchmark. The four synthetic examples are available through `python -m agent_security_scanner`.

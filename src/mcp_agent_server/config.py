@@ -1,5 +1,6 @@
 """Allowlisted process settings for the local stdio server."""
 
+import os
 import stat
 from collections.abc import Mapping
 from os import environ
@@ -13,8 +14,21 @@ from .guardrails.security_settings import OutputSettings, RateSettings
 from .transport.settings import HTTPSettings
 
 LogLevel = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
-PROJECT = Path(__file__).resolve().parents[2]
+PACKAGE = Path(__file__).resolve().parent
+BUNDLED_POLICIES = PACKAGE / "_bundle/policies"
+INSTALLED = BUNDLED_POLICIES.is_dir()
+PROJECT = Path.home() / ".guardrail" if INSTALLED else PACKAGE.parents[1]
+POLICIES = PROJECT / "policies"
+DEFAULT_POLICY = (BUNDLED_POLICIES if INSTALLED else POLICIES) / "tool_access.yaml"
 AUDIT_ROOT = PROJECT / ".runtime/audit"
+
+
+def prepare_runtime() -> None:
+    if INSTALLED:
+        PROJECT.mkdir(mode=0o700, exist_ok=True)
+        info = PROJECT.lstat()
+        if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid() or info.st_mode & 0o077:
+            raise ValueError("Guardrail state must be a private directory owned by this user")
 
 
 def audit_path(path: Path) -> Path:
@@ -23,9 +37,9 @@ def audit_path(path: Path) -> Path:
         not candidate.is_relative_to(AUDIT_ROOT)
         or ".." in path.parts
         or path.suffix != ".sqlite3"
-        or not (PROJECT / "pyproject.toml").is_file()
+        or (not INSTALLED and not (PROJECT / "pyproject.toml").is_file())
     ):
-        raise ValueError("Use a .sqlite3 file inside the repository's .runtime/audit directory")
+        raise ValueError("Use a .sqlite3 file inside Guardrail's .runtime/audit directory")
     for part in (candidate, *candidate.parents):
         if part.is_symlink():
             raise ValueError("Audit paths cannot contain symlinks")
@@ -67,7 +81,7 @@ class Settings(BaseModel):
     environment: Literal["local", "test", "production"] = "local"
     log_level: LogLevel = "INFO"
     transport: Literal["stdio"] = "stdio"
-    policy_file: Path = PROJECT / "policies/tool_access.yaml"
+    policy_file: Path = DEFAULT_POLICY
     audit_db: Path = AUDIT_ROOT / "events.sqlite3"
     storage_backend: Literal["sqlite", "postgresql"] = "sqlite"
     database_url: SecretStr | None = Field(default=None, repr=False, exclude=True)

@@ -10,6 +10,8 @@ Guardrail includes an MCP server with authorized tool calls, an Agent Security S
 
 ## Run locally
 
+See the [Python distribution quickstart](docs/DISTRIBUTION.md) for installation from release archives and MCP client configuration.
+
 With Python 3.11.18 and uv installed, start at the repository root.
 
 ```sh
@@ -35,3 +37,7 @@ See [architecture](docs/ARCHITECTURE.md), [verification](docs/VERIFICATION.md), 
 
 - [Hosted Guardrail dashboard](https://mcp-agent-security.vercel.app) presents recorded results and separately operated live account features.
 - [Recorded recruiter demo](https://guardrail-mcp-security-lab.vercel.app) presents standalone synthetic walkthroughs.
+
+## Acknowledgments
+
+OpenAI Codex assisted with implementation, testing, debugging, security remediation and release verification. ChatGPT assisted with technical planning, review and release criteria. The repository owner reviews changes and maintains Guardrail. See the [contribution details](ACKNOWLEDGMENTS.md).

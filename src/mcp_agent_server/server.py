@@ -11,7 +11,7 @@ from pydantic import ValidationError
 
 from .adapters.http import Fetcher
 from .adapters.outbox import Outbox
-from .config import Settings
+from .config import Settings, prepare_runtime
 from .errors import ConfigurationError, ErrorCode, GuardrailError, InternalError
 from .guardrails.authorization import AuthorizationContext
 from .guardrails.middleware import ToolMiddleware
@@ -32,7 +32,8 @@ def create_server(
     fetcher: Fetcher | None = None,
     outbox: Outbox | None = None,
 ) -> MCPServer[None]:
-    package_version = version("mcp-agent-server")
+    prepare_runtime()
+    package_version = version("guardrail-mcp-server")
     policy = load_policy(settings.policy_file)
     if any(
         rule.action == "permit"

@@ -22,7 +22,7 @@ def probe():
         s.audit_db.rename(s.audit_db.with_suffix('.saved'))
     if (s.audit_db.parent/'throw').exists():
         raise RuntimeError('/private/INTERNAL_TEST_SECRET')
-    return Health(service=s.app_name,version=version('mcp-agent-server'))
+    return Health(service=s.app_name,version=version('guardrail-mcp-server'))
 server=create_server(s,health_handler=probe)
 server.run(transport='stdio')
 """

@@ -4,15 +4,25 @@ build-backend = "hatchling.build"
 
 [project]
 license = "Apache-2.0"
-name = "agent-security-scanner"
+name = "guardrail-offline-scanner"
 version = "0.1.0"
 description = "Passive detector, offline benchmark, and evidence contracts"
 readme = "README.md"
 requires-python = ">=3.11"
+maintainers = [{ name = "abhi0874" }]
+classifiers = ["Programming Language :: Python :: 3.11"]
 dependencies = [
     "jsonschema==4.23.0",
     "pydantic==2.14.2",
 ]
+
+[project.urls]
+Repository = "https://github.com/abhi0874/guardrail"
+Documentation = "https://github.com/abhi0874/guardrail/blob/main/docs/DISTRIBUTION.md"
+Issues = "https://github.com/abhi0874/guardrail/issues"
+
+[project.scripts]
+guardrail-offline-scanner = "agent_security_scanner.detectors.__main__:main"
 
 [dependency-groups]
 dev = [
@@ -28,6 +38,9 @@ packages = ["core/agent_security_scanner", "api/scanner_api"]
 [tool.hatch.build.targets.wheel.force-include]
 "data/detector_validation" = "agent_security_scanner/_bundle/data/detector_validation"
 "api/schemas" = "agent_security_scanner/_bundle/api/schemas"
+
+[tool.hatch.build.targets.sdist]
+include = ["/core", "/api", "/data/detector_validation", "/LICENSE", "/README.md", "/DETECTOR-METHODOLOGY.md", "/pyproject.toml"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

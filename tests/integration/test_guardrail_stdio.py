@@ -28,7 +28,7 @@ async def test_protocol_persistent_restart_and_correlation(audit_db: Path) -> No
             assert not result.is_error and result.structured_content == {
                 "service": "mcp-agent-server",
                 "status": "ok",
-                "version": version("mcp-agent-server"),
+                "version": version("guardrail-mcp-server"),
             }
     events = rows(audit_db)
     assert [r["phase"] for r in events] == ["pre", "post", "pre", "post"]
