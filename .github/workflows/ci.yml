@@ -46,8 +46,10 @@ jobs:
           path: reports/
           retention-days: 7
           if-no-files-found: ignore
-      - name: Build runtime image
-        run: docker build -t mcp-agent-server:ci .
+      - name: Build runtime images
+        run: |
+          docker build -t mcp-agent-server:ci .
+          docker build -f Dockerfile.cloud -t mcp-agent-server:cloud-ci .
       - name: Install locked smoke-client dependencies (setup only)
         run: uv sync --frozen --python 3.11.18
       - name: Runtime smoke, persistence and shutdown

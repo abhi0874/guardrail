@@ -7,7 +7,7 @@ RUN apk add --no-cache krb5-libs=1.22.3-r0 libcrypto3=3.5.9-r1 libssl3=3.5.9-r1 
 
 FROM python-base AS adapter
 COPY --from=uv /uv /usr/local/bin/uv
-ADD --checksum=sha256:af81a99b02600e6c2cdf468509c04bb8208500ea60d63f70616e32ea9cb2758f https://files.pythonhosted.org/packages/5b/23/0074f50899d773aae857af496745cd898da868f8f2d9415591d51c391cec/psycopg_c-3.3.8.tar.gz /tmp/psycopg_c-3.3.8.tar.gz
+ADD --checksum=sha256:591fcbcb40e089235a7f096b9e887e71ccae78fd337aba198d918e33707c5e01 https://files.pythonhosted.org/packages/bc/2b/09dece13af82681cad81a70d21da76ecf37bc280a15693a3fe966751649f/psycopg_c-3.3.9.tar.gz /tmp/psycopg_c-3.3.9.tar.gz
 COPY scripts/container-build-requirements.txt /build-requirements.txt
 COPY scripts/build-psycopg-adapter.sh /build-adapter.sh
 RUN sh /build-adapter.sh

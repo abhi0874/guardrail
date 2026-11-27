@@ -8,4 +8,4 @@ apk add --no-cache \
     mpfr4=4.2.2-r0 musl-dev=1.2.6-r3 openssl-dev=3.5.9-r1 pkgconf=2.5.1-r0 zstd-libs=1.6.0-r1
 uv venv --python /usr/local/bin/python /build-env
 uv pip install --python /build-env/bin/python --only-binary :all: --require-hashes -r /build-requirements.txt
-uv pip install --python /build-env/bin/python --no-build-isolation --no-deps --target /adapter /tmp/psycopg_c-3.3.8.tar.gz
+uv pip install --python /build-env/bin/python --no-build-isolation --no-deps --target /adapter /tmp/psycopg_c-3.3.9.tar.gz
