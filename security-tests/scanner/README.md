@@ -2,7 +2,7 @@
 
 This package evaluates saved observations against a supplied authorization context. It includes the original rules, advisory judge interface, metrics, reporting types and read-only API response schemas. The MCP server has its own environment.
 
-From this directory, install with `uv sync --frozen --python 3.11.15`. Run the following commands in the checkout.
+From this directory, install with `uv sync --frozen --python 3.11.18`. Run the following commands in the checkout.
 
 ```sh
 uv run --frozen python -m agent_security_scanner

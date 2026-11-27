@@ -1,20 +1,34 @@
-FROM ghcr.io/astral-sh/uv:0.11.26@sha256:3d868e555f8f1dbc324afa005066cd11e1053fc4743b9808ca8025283e65efa5 AS uv
-FROM python:3.11.15-slim-bookworm@sha256:d29f48a31a8b408ed19272ca1e7b10ebae13b240a27e862d3d4217c528e2e0c3 AS build
+FROM ghcr.io/astral-sh/uv:0.13.10@sha256:a3ea1357342c1a4bf9a0c53a3deb1b55379aefa037338d8113d5771efa01774f AS uv
+FROM python:3.11.18-alpine3.24@sha256:7fbad8e4652eae0186429a6f26cf5b23e27e8c6fd7ac4d0cfd7a6988cdeea1e1 AS python-base
+# Use the system libpq so PostgreSQL and its TLS and Kerberos libraries receive Alpine updates.
+RUN apk add --no-cache krb5-libs=1.22.3-r0 libcrypto3=3.5.9-r1 libssl3=3.5.9-r1 zlib=1.4-r0 libpq=18.7-r0 \
+    && python -m pip uninstall --yes setuptools pip \
+    && rm -rf /usr/local/lib/python3.11/ensurepip
+
+FROM python-base AS adapter
+COPY --from=uv /uv /usr/local/bin/uv
+ADD --checksum=sha256:af81a99b02600e6c2cdf468509c04bb8208500ea60d63f70616e32ea9cb2758f https://files.pythonhosted.org/packages/5b/23/0074f50899d773aae857af496745cd898da868f8f2d9415591d51c391cec/psycopg_c-3.3.8.tar.gz /tmp/psycopg_c-3.3.8.tar.gz
+COPY scripts/container-build-requirements.txt /build-requirements.txt
+COPY scripts/build-psycopg-adapter.sh /build-adapter.sh
+RUN sh /build-adapter.sh
+
+FROM python-base AS build
 COPY --from=uv /uv /usr/local/bin/uv
 ENV UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never
 WORKDIR /app
 COPY pyproject.toml uv.lock .python-version ./
 COPY src ./src
-RUN uv sync --frozen --no-dev --python /usr/local/bin/python
+RUN uv sync --frozen --no-install-package psycopg-binary --no-dev --python /usr/local/bin/python
 
-FROM python:3.11.15-slim-bookworm@sha256:d29f48a31a8b408ed19272ca1e7b10ebae13b240a27e862d3d4217c528e2e0c3 AS runtime
-RUN groupadd --gid 10001 app && useradd --uid 10001 --gid app --create-home app \
+FROM python-base AS runtime
+RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app \
     && mkdir -p /app/.runtime/audit && chown -R app:app /app/.runtime \
     && chmod 700 /app/.runtime /app/.runtime/audit
 WORKDIR /app
 ENV PATH="/app/.venv/bin:$PATH" PYTHONUNBUFFERED=1 PYTHONDONTWRITEBYTECODE=1
 # Immutable source installation preserves the repository-relative policy/audit contract.
 COPY --from=build /app/.venv ./.venv
+COPY --from=adapter /adapter/ /app/.venv/lib/python3.11/site-packages/
 COPY src ./src
 COPY policies ./policies
 COPY pyproject.toml LICENSE LICENSING.md ./

@@ -13,7 +13,7 @@ from mcp_agent_server.config import Settings
 from mcp_agent_server.storage.migrate import migrate
 from mcp_agent_server.storage.postgres import PostgresStore
 
-IMAGE = "pgvector/pgvector@sha256:40b404964359299eefdd5f8518facf1886c562848cf4de13b6eaf91cb70c2b87"
+IMAGE = "guardrail-test-db:pg17.12-vector0.8.7-r1"
 
 
 def docker(*args: str) -> str:

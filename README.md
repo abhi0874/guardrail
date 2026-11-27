@@ -10,10 +10,10 @@ Guardrail includes an MCP server with authorized tool calls, an Agent Security S
 
 ## Run locally
 
-With Python 3.11.15 and uv installed, start at the repository root.
+With Python 3.11.18 and uv installed, start at the repository root.
 
 ```sh
-uv sync --frozen --python 3.11.15
+uv sync --frozen --python 3.11.18
 uv run --frozen python -m mcp_agent_server.agent demo
 ```
 
