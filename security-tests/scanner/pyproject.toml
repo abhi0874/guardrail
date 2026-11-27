@@ -12,7 +12,7 @@ requires-python = ">=3.11"
 maintainers = [{ name = "abhi0874" }]
 classifiers = ["Programming Language :: Python :: 3.11"]
 dependencies = [
-    "jsonschema==4.23.0",
+    "jsonschema==4.26.0",
     "pydantic==2.14.2",
 ]
 
