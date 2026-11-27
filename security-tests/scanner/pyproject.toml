@@ -13,7 +13,7 @@ maintainers = [{ name = "abhi0874" }]
 classifiers = ["Programming Language :: Python :: 3.11"]
 dependencies = [
     "jsonschema==4.23.0",
-    "pydantic==2.14.2",
+    "pydantic==2.14.4",
 ]
 
 [project.urls]
