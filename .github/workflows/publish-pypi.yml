@@ -1,0 +1,77 @@
+name: Publish approved Guardrail 0.1.0 distributions
+
+on:
+  workflow_dispatch:
+    inputs:
+      publisher:
+        description: Protected publisher for the approved package
+        required: true
+        type: choice
+        options:
+          - pypi
+          - pypi-scanner
+
+permissions: {}
+
+concurrency:
+  group: publish-guardrail-0.1.0-${{ inputs.publisher }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: >-
+      github.repository == 'abhi0874/guardrail' &&
+      github.ref == 'refs/heads/main' &&
+      (inputs.publisher == 'pypi' || inputs.publisher == 'pypi-scanner')
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: ${{ inputs.publisher }}
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Verify the release tag and download its approved distributions
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PUBLISHER: ${{ inputs.publisher }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          repository=abhi0874/guardrail
+          tag=v0.1.0
+          commit=c6e51d94888bc09b14bef2b06bcdb47b62e4aa9f
+          tree=4f1eb459613e67c6bbcb80391412d9f431ebb4bc
+          gh api "repos/$repository/git/ref/tags/$tag" |
+            jq -e --arg sha "$commit" '.object.type == "commit" and .object.sha == $sha'
+          gh api "repos/$repository/git/commits/$commit" |
+            jq -e --arg tree "$tree" '.tree.sha == $tree'
+          gh api "repos/$repository/releases/tags/$tag" |
+            jq -e '.tag_name == "v0.1.0" and .immutable and (.draft | not) and (.prerelease | not)'
+
+          mkdir dist
+          case "$PUBLISHER" in
+            pypi)
+              wheel=guardrail_mcp_server-0.1.0-py3-none-any.whl
+              source=guardrail_mcp_server-0.1.0.tar.gz
+              wheel_sha=924865018929947159de3257be0b2314d9e8c15bcf3f08248ef191af543801e6
+              source_sha=34a71cb8e375f5a6381a1574c72103805a4ed0d76899a02c734b7289e3ca7275
+              ;;
+            pypi-scanner)
+              wheel=guardrail_offline_scanner-0.1.0-py3-none-any.whl
+              source=guardrail_offline_scanner-0.1.0.tar.gz
+              wheel_sha=c994963ab70c1841c9bcb3529e70eec79cf18767c1988d2defb2570387c11d51
+              source_sha=66d2754e014b67e335f9a91b188a3e98daf4e99f9943d0fbb59cc0cee56686cf
+              ;;
+            *) exit 1 ;;
+          esac
+
+          gh release download "$tag" --repo "$repository" --dir dist \
+            --pattern "$wheel" --pattern "$source"
+          printf '%s  %s\n' "$wheel_sha" "dist/$wheel" "$source_sha" "dist/$source" |
+            sha256sum -c -
+          test "$(find dist -mindepth 1 -maxdepth 1 -type f | wc -l)" -eq 2
+      - name: Publish exact distributions and PyPI attestations
+        uses: pypa/gh-action-pypi-publish@7245906fb61fa33a13554f9d5fb856fe61758086 # v1.14.3
+        with:
+          packages-dir: dist/
+          attestations: true
