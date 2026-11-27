@@ -22,11 +22,12 @@ async def execute(output: Path | None = None) -> int:
     from contextlib import closing
     from tempfile import TemporaryDirectory, TemporaryFile, mkdtemp
 
-    from ..config import AUDIT_ROOT
+    from ..config import AUDIT_ROOT, prepare_runtime
     from .connection import connect
     from .fake import FakeLLM, scenario
     from .runner import run
 
+    prepare_runtime()
     AUDIT_ROOT.mkdir(parents=True, exist_ok=True)
     if output is None:
         base = Path(".runtime")

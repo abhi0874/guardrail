@@ -18,7 +18,9 @@ ENV UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never
 WORKDIR /app
 COPY pyproject.toml uv.lock .python-version ./
 COPY src ./src
-RUN uv sync --frozen --no-install-package psycopg-binary --no-dev --python /usr/local/bin/python
+COPY policies ./policies
+COPY docs/DISTRIBUTION.md ./docs/DISTRIBUTION.md
+RUN uv sync --frozen --no-dev --python /usr/local/bin/python
 
 FROM python-base AS runtime
 RUN addgroup -g 10001 app && adduser -D -u 10001 -G app app \

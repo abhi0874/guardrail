@@ -18,7 +18,7 @@ ENV UV_LINK_MODE=copy UV_PYTHON_DOWNLOADS=never PYTHONDONTWRITEBYTECODE=1 UV_CAC
 WORKDIR /app
 COPY . .
 RUN apk add --no-cache bash=5.3.9-r1 openssl=3.5.9-r1 \
-    && uv sync --frozen --no-install-package psycopg-binary --python /usr/local/bin/python \
+    && uv sync --frozen --python /usr/local/bin/python \
     && rm -rf /app/.cache/uv \
     && addgroup -g 10001 app && adduser -D -u 10001 -G app app \
     && mkdir -p .runtime/audit .cache/reports \

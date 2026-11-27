@@ -50,7 +50,7 @@ async def _probe(args: list[str], directory: Path, db: Path) -> None:
                 protocol = client.protocol_version
                 assert protocol == "2026-07-28"
                 assert client.server_info is not None
-                assert client.server_info.version == version("mcp-agent-server")
+                assert client.server_info.version == version("guardrail-mcp-server")
                 listing = await client.list_tools()
                 assert sorted(tool.name for tool in listing.tools) == [
                     "fetch_url",
@@ -68,7 +68,7 @@ async def _probe(args: list[str], directory: Path, db: Path) -> None:
                 expected = {
                     "status": "ok",
                     "service": "mcp-agent-server",
-                    "version": version("mcp-agent-server"),
+                    "version": version("guardrail-mcp-server"),
                 }
                 assert not first.is_error and not second.is_error
                 assert first.structured_content == second.structured_content == expected

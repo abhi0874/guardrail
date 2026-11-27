@@ -36,6 +36,8 @@ FILES = {
     ".python-version",
     "README.md",
     "CONTRIBUTING.md",
+    "ACKNOWLEDGMENTS.md",
+    "CODE_OF_CONDUCT.md",
     "SECURITY.md",
     "LICENSING.md",
     "LICENSE",

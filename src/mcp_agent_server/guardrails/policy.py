@@ -11,12 +11,12 @@ from jsonschema import Draft202012Validator
 from jsonschema.exceptions import ValidationError as SchemaError
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
+from mcp_agent_server.config import DEFAULT_POLICY as DEFAULT_POLICY
+from mcp_agent_server.config import POLICIES as POLICIES
 from mcp_agent_server.config import PROJECT
 from mcp_agent_server.errors import ErrorCode, GuardrailError
 
-POLICIES = PROJECT / "policies"
-DEFAULT_POLICY = POLICIES / "tool_access.yaml"
-SCHEMA = POLICIES / "schema/policy.v1.schema.json"
+SCHEMA = DEFAULT_POLICY.parent / "schema/policy.v1.schema.json"
 Name = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_-]{0,63}$")]
 Scalar = str | int | bool
 
@@ -162,7 +162,7 @@ def load_policy(path: Path = DEFAULT_POLICY) -> Policy:
     path = PROJECT / path
     try:
         if (
-            not path.is_relative_to(POLICIES)
+            (path != DEFAULT_POLICY and not path.is_relative_to(POLICIES))
             or ".." in path.parts
             or path.suffix != ".yaml"
             or any(p.is_symlink() for p in (path, *path.parents))
